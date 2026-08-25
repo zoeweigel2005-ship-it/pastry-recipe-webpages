@@ -42,4 +42,4 @@ A pair of responsive pastry recipe web pages created with pure HTML5 and CSS3 (f
 
 ## 🌐 Live Demo
 
-**[👉 Clique ici pour voir le site en ligne !](https://zoeweigel2005-ship-it.github.io/pastry-recipe-webpages/)**
+**[👉 Click here to view the live website!](https://zoeweigel2005-ship-it.github.io/pastry-recipe-webpages/)**
