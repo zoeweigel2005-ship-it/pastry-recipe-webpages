@@ -42,7 +42,4 @@ A pair of responsive pastry recipe web pages created with pure HTML5 and CSS3 (f
 
 ## 🌐 Live Demo
 
-You can host this project directly using **GitHub Pages**:
-1. Go to **Settings** > **Pages**.
-2. Select the `main` branch and `/ (root)` folder.
-3. Save to get your live website URL!
+**[👉 Clique ici pour voir le site en ligne !](https://zoeweigel2005-ship-it.github.io/pastry-recipe-webpages/)**
