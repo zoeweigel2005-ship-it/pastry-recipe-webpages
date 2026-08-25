@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site de Cookie Rose | Recette Pro</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* VARIABLES DE COULEURS */
+        :root {
+            --pink-primary: #D86B7E;
+            --pink-light: #FCDADD;
+            --pink-bg: #FFEBF0;
+            --pink-check: #FFD6DF;
+            --text-dark: #4A2B35;
+            --text-muted: #8A6472;
+            --white: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* FOND À CARREAUX (GINGHAM) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--pink-bg);
+            background-image: 
+                linear-gradient(90deg, rgba(255, 214, 223, 0.6) 50%, transparent 50%),
+                linear-gradient(rgba(255, 214, 223, 0.6) 50%, transparent 50%);
+            background-size: 60px 60px;
+            line-height: 1.6;
+        }
+
+        /* CONTENEUR GLOBAL */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* BANNIÈRE HAUT */
+        .hero-banner {
+            width: 100%;
+            height: 350px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(216, 107, 126, 0.2);
+        }
+
+        .hero-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* DISPOSITION PRINCIPALE EN GRILLE */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* ----- COLONNE DE GAUCHE (ASIDES) ----- */
+        .sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        /* Carte Promo Recette Fondant */
+        .promo-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(216, 107, 126, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .promo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(216, 107, 126, 0.2);
+        }
+
+        .promo-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .promo-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        /* Carte Bouton YouTube */
+        .youtube-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(216, 107, 126, 0.1);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .youtube-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .yt-btn {
+            display: inline-block;
+            background: #FF0000; /* Rouge YouTube */
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .yt-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Newsletter */
+        .newsletter-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(216, 107, 126, 0.1);
+        }
+        .newsletter-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        .newsletter-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--pink-check);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+        .input-group button {
+            background: var(--pink-primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* ----- COLONNE DE DROITE (RECETTE) ----- */
+        .recipe-main-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(216, 107, 126, 0.15);
+            position: relative;
+        }
+
+        .recipe-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .recipe-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tag {
+            background: var(--pink-light);
+            color: var(--pink-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .recipe-intro {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Grille interne de la recette */
+        .recipe-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        h3.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        h3.section-title i { color: var(--pink-primary); font-size: 1.2rem; }
+
+        /* --- STYLE : INGRÉDIENTS COCHABLES --- */
+        .ingredient-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .ingredient-item input[type="checkbox"] {
+            display: none;
+        }
+        
+        .checkmark {
+            min-width: 22px;
+            height: 22px;
+            border: 2px solid var(--pink-primary);
+            border-radius: 6px;
+            margin-right: 15px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.2s;
+        }
+        
+        .ingredient-item input[type="checkbox"]:checked + .checkmark {
+            background-color: var(--pink-primary);
+        }
+        
+        .ingredient-item input[type="checkbox"]:checked + .checkmark::after {
+            content: '\f00c';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .ingredient-item input[type="checkbox"]:checked ~ .ing-text {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Préparation */
+        .prep-list {
+            list-style: none;
+            counter-reset: prep-counter;
+        }
+        .prep-list li {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+        .prep-list li::before {
+            counter-increment: prep-counter;
+            content: counter(prep-counter);
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 32px;
+            height: 32px;
+            background: var(--pink-light);
+            color: var(--pink-primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .mid-prep-img {
+            width: 100%;
+            height: 220px;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Astuce */
+        .astuce-section {
+            margin-top: 30px;
+            background: #FAFAFA;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid var(--pink-primary);
+        }
+
+        /* ----- CARTE COMMUNAUTÉ (Flottante/Droite) ----- */
+        .community-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+
+        .community-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .photo-item {
+            position: relative;
+        }
+
+        .photo-item img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .photo-meta {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+        .photo-meta i { color: var(--pink-primary); }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        footer a { color: var(--text-dark); text-decoration: none; font-weight: 500; }
+        .social-icons { display: flex; gap: 15px; font-size: 1.2rem; color: var(--text-dark); }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 992px) {
+            .main-layout { grid-template-columns: 1fr; }
+            .recipe-content-grid { grid-template-columns: 1fr; }
+            .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+            .hero-banner { height: 250px; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { grid-template-columns: 1fr; }
+            .recipe-header h1 { font-size: 2.2rem; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="hero-banner">
+            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&h=400&q=80" alt="Cookies Roses Appétissants">
+        </div>
+
+        <div class="main-layout">
+            
+            <aside class="sidebar">
+                <h2>Côté Cuisine</h2>
+                
+                <div class="promo-card">
+                    <a href="chocolat a cookie.html">
+                        <h3>Nouveau : Le Fondant 🍫</h3>
+                        <img src="https://images.pexels.com/photos/3998950/pexels-photo-3998950.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Gâteau au chocolat fondant cœur coulant">
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Clique ici pour découvrir notre nouvelle recette coulante !</p>
+                    </a>
+                </div>
+
+                <div class="youtube-card">
+                    <h3><i class="fa-brands fa-youtube" style="color: #FF0000; margin-right: 8px;"></i> Ambiance</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Mets-toi dans l'ambiance avec Rihanna pour cuisiner !</p>
+                    
+                    <a href="https://www.youtube.com/watch?v=kxvsJf5OkyA" target="_blank" class="yt-btn">
+                        <i class="fa-solid fa-play"></i> Lancer "Stay"
+                    </a>
+                </div>
+
+                <div class="newsletter-card">
+                    <h3>Newsletter Signup</h3>
+                    <p>Inscris-toi pour plus de gourmandises !</p>
+                    <div class="input-group">
+                        <input type="email" placeholder="Email">
+                        <button>S'inscrire</button>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="recipe-main-card">
+                    
+                    <div class="recipe-header">
+                        <h1>Recette Cookies Américains</h1>
+                        <div class="tags">
+                            <span class="tag"><i class="fa-solid fa-tag"></i> Recettes</span>
+                            <span class="tag"><i class="fa-solid fa-medal"></i> Badges</span>
+                            <span class="tag"><i class="fa-solid fa-star"></i> Recette Pro</span>
+                        </div>
+                        <p class="recipe-intro">Appétissants, gourmets et délicats. Ces fameux cookies bien moelleux au centre et dorés sur les bords (façon Subway) sont un charme visuel et gustatif. Sortez votre grille de cuisson, c'est parti !</p>
+                    </div>
+
+                    <div class="recipe-content-grid">
+                        
+                        <div class="ingredients-col">
+                            <h3 class="section-title">Ingrédients <i class="fa-solid fa-spoon"></i></h3>
+                            
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>220 g</b> de farine</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>185 g</b> de sucre roux</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>15 g</b> de sucre blanc</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>1</b> œuf frais</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>115 g</b> de beurre mou</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>1/2 c.à.c</b> de levure</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>1/2 c.à.c</b> de bicarbonate</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>1 c.à.c</b> de vanille</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>1 pincée</b> de sel</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>100 g</b> choco blanc</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>100 g</b> choco lait</span>
+                            </label>
+                            <label class="ingredient-item">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                <span class="ing-text"><b>100 g</b> noix du brésil</span>
+                            </label>
+                        </div>
+
+                        <div class="prep-col">
+                            <h3 class="section-title">Préparation <i class="fa-solid fa-bowl-food"></i></h3>
+                            <ol class="prep-list">
+                                <li>Préchauffez votre four à 140°C et sortez la plaque de cuisson. Mettez du papier cuisson dessus.</li>
+                                <li>Mélangez le beurre mou avec les sucres, et l’œuf, jusqu’à obtenir une pâte souple et homogène.</li>
+                                <li>À part, mélangez la farine, la levure, le bicarbonate, le sel et la vanille. Incorporez-le au premier mélange pour avoir une pâte malléable à la main.</li>
+                                <li>Ajoutez 1/3 des pépites. Formez des boules de pâte juste légèrement aplaties et disposez-les sur la plaque bien espacées. Répartissez les pépites restantes dessus.</li>
+                                <li>Enfournez pour 15 minutes, 17 max. Laissez refroidir une demi-heure au moins.</li>
+                            </ol>
+
+                            <img src="https://th.bing.com/th/id/OIP.fGoXWpt3SJLs0r36InZ4dQHaE8?w=260&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3" alt="Résultat des cookies" class="mid-prep-img">
+
+                            <div class="astuce-section">
+                                <h3 class="section-title" style="font-size: 1.3rem;">Astuce <i class="fa-solid fa-lightbulb"></i></h3>
+                                <p style="font-size: 0.9rem; color: var(--text-muted);">En fin de cuisson, les cookies n’ont pas l’air cuits, c’est normal ! Ne les remettez pas au four. Le bord doit être à peine doré, et le centre tout mou. 🍪</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-card">
+                    <h3>Photos de la communauté</h3>
+                    <div class="photo-grid">
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 1">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 124</div>
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 2">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 89</div>
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1618923850106-920f75e2eb27?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 3">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 256</div>
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 4">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 42</div>
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 5">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 112</div>
+                        </div>
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=300&h=300&q=80" alt="Community Cookie 6">
+                            <div class="photo-meta"><i class="fa-solid fa-heart"></i> 305</div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <footer>
+            <a href="#">Mentions Légales</a>
+            <a href="https://www.instagram.com/zoe_wgll/" target="_blank">Contact (@zoe_wgll)</a>
+            <span>Suis-moi</span>
+            <div class="social-icons">
+                <i class="fa-brands fa-facebook"></i>
+                <a href="https://www.instagram.com/zoe_wgll/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <i class="fa-brands fa-youtube"></i>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
